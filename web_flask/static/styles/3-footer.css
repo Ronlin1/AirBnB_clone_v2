@@ -1,12 +1,10 @@
-footer {
-    display: flex;
-    width: 100%;
+footer{
+    background-color: white;
     height: 60px;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    background: #FFFFFF;
-    border-top: 1px solid #CCCCCC;
-    grid-area: footer;
-    align-self: flex-end;
+    width: 100%;
+    border-top: solid 1px #CCCCCC;
+    position: fixed;
+    bottom:0;
+    text-align:center;
+    line-height:60px;
 }

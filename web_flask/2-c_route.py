@@ -1,31 +1,34 @@
 #!/usr/bin/python3
-'''A simple Flask web application.
-'''
+"""
+script starts Flask web app
+    listen on 0.0.0.0, port 5000
+    routes: /:         display "Hello HBNB!"
+            /hbnb:     display "HBNB"
+            /c/<text>: display "C" + text (replace underscores with space)
+"""
+
 from flask import Flask
-
-
 app = Flask(__name__)
-'''The Flask application instance.'''
 app.url_map.strict_slashes = False
 
 
 @app.route('/')
-def index():
-    '''The home page.'''
-    return 'Hello HBNB!'
+def hello_hbnb():
+    """display text"""
+    return "Hello HBNB!"
 
 
 @app.route('/hbnb')
 def hbnb():
-    '''The hbnb page.'''
-    return 'HBNB'
+    """display text"""
+    return "HBNB"
 
 
 @app.route('/c/<text>')
-def c_page(text):
-    '''The c page.'''
-    return 'C {}'.format(text.replace('_', ' '))
+def c_text(text):
+    """display custom text given"""
+    return "C {}".format(text.replace('_', ' '))
 
 
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port='5000')
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=5000)
