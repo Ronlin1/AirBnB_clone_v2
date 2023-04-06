@@ -1,52 +1,65 @@
 #!/usr/bin/python3
 """
-script starts Flask web app
-    listen on 0.0.0.0, port 5000
-    routes: /:              display "Hello HBNB!"
-            /hbnb:          display "HBNB"
-            /c/<text>:      display "C" + text (replace underscores with space)
-            /python/<text>: display "Python" + text (default is "is cool")
-            /number/<n>:    display "n is a number" only if int
+A script that starts a Flask web application:
 """
 
 from flask import Flask
+
 app = Flask(__name__)
-app.url_map.strict_slashes = False
 
 
-@app.route('/')
-def hello_hbnb():
-    """display text"""
+@app.route('/', strict_slashes=False)
+def hello_route():
+    """
+    Displays 'Hello HBNB!'
+    Returns:
+        str: "Hello HBNB"
+    """
     return "Hello HBNB!"
 
 
-@app.route('/hbnb')
-def hbnb():
-    """display text"""
+@app.route('/hbnb', strict_slashes=False)
+def hbnb_route():
+    """
+    Displays 'HBNB'
+    Returns:
+        str: "HBNB"
+    """
     return "HBNB"
 
 
-@app.route('/c/<text>')
-def c_text(text):
-    """display custom text given"""
+@app.route('/c/<text>', strict_slashes=False)
+def c_route(text):
+    """
+    display “C ” followed by the value of the text variable
+        (replace underscore '_' symbols with a space ' ')
+    Returns:
+        str: "C <text>"
+    """
     return "C {}".format(text.replace('_', ' '))
 
 
-@app.route('/python')
-@app.route('/python/<text>')
-def python_text(text="is cool"):
-    """display custom text given
-       first route statement ensures it works for:
-          curl -Ls 0.0.0.0:5000/python ; echo "" | cat -e
-          curl -Ls 0.0.0.0:5000/python/ ; echo "" | cat -e
+@app.route('/python', strict_slashes=False)
+@app.route('/python/<text>', strict_slashes=False)
+def python_route(text="is_cool"):
+    """
+    display “Python ”, followed by the value of the text variable
+        (replace underscore _ symbols with a space )
+        - The default value of text is “is cool”
+    Returns:
+        str: "Python <text>"
     """
     return "Python {}".format(text.replace('_', ' '))
 
 
-@app.route('/number/<int:n>')
-def text_if_int(n):
-    """display text only if int given"""
-    return "{:d} is a number".format(n)
+@app.route('/number/<int:n>', strict_slashes=False)
+def number_route(n):
+    """
+    display “n is a number” only if n is an integer
+    Returns:
+        int: the value of n
+    """
+    return "{} is a number".format(n)
 
 
 if __name__ == "__main__":
